@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt Generator Form</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: "Roboto Slab", serif;
+        }
+
+        body {
+            background-color: #f4f4f9;
+        }
+
+        .form-control,
+        .btn-primary,
+        .btn-success {
+            border-radius: 5px;
+        }
+
+        .container {
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .receipt {
+            background-color: #f0f0f0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            max-width: 800px;
+            margin: 20px auto;
+            display: none; /* Initially hide the receipt */
+        }
+
+
+        .money-receipt-badge {
+            background-color: #FFA500;
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .company-name {
+            color: #8B0000;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .footer-bar {
+            height: 10px;
+        }
+
+        /* Customizing the form inputs */
+        .form-control {
+            border: none;
+            border-bottom: 1px solid #ced4da;
+            background-color: transparent;
+        }
+
+        /* Button hover effects */
+        .btn-primary:hover,
+        .btn-success:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5 w-50">
+        <h1 class="text-center mb-4" style="color: #007bff;">United We Stand</h1>
+        <h2 class="text-center mb-4">Receipt Generator</h2>
+
+        <form id="donationForm" class="mb-4">
+            <div class="form-group">
+                <label for="donorName" style="font-size: 18px;">Donor Name:</label>
+                <input type="text" class="form-control" id="donorName" name="donorName" required>
+            </div>
+            <div class="form-group">
+                <label for="donationAmount" style="font-size: 18px;">Donation Amount:</label>
+                <input type="number" class="form-control" id="donationAmount" name="donationAmount" required>
+            </div>
+            <div class="form-group">
+                <label for="amountInWords" style="font-size: 18px;">Amount in Words:</label>
+                <input type="text" class="form-control" id="amountInWords" name="amountInWords" required>
+            </div>
+            <div class="form-group">
+                <label for="donationDate" style="font-size: 18px;">Date of Donation:</label>
+                <input type="date" class="form-control" id="donationDate" name="donationDate" required>
+            </div>
+            <center>
+                <button type="button" class="btn btn-primary w-50 " onclick="generateReceipt()">Create Receipt</button>
+            </center>
+            
+        </form>
+    </div>
+
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="col-8">
+            <div class="receipt p-4" id="receipt">
+
+                <div class="row g-0">
+                    <div class="col-4 footer-bar" style="background-color: orange;"></div>
+                    <div class="col-4 footer-bar" style="background-color: white;"></div>
+                    <div class="col-4 footer-bar" style="background-color: green;"></div>
+                </div>
+                <div class="row mb-4 align-items-center mt-3">
+                    <div class="col-4">
+                        <div class="logo">
+                            <img src="logo.png" alt="Logo"
+                                style="width: 100px; height: 100px; background-color: none  !important;">
+                        </div>
+                    </div>
+                    <div class="col-4 text-center">
+                        <span class="money-receipt-badge">DONATION RECEIPT</span>
+                    </div>
+                    <div class="col-4 text-end" style="position: absolute; right: 0;">
+                        <h5 class="company-name mb-0 fw-bolder fs-5">United We Stand Foundation Nashik</h5>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <h5 id="receiptRegNo" style="font-weight: bold;">Reg.No. : 0000610/2019 <br> (12 A/80G) Certified</h5>
+                    </div>
+                    <div class="col-6 text-end">
+                        <h5 id="receiptDate" style="text-align: right; font-weight: bold;">Date:</h5>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <h5 id="receiptText" style="text-align: justify;"></h5>
+                </div>
+
+                <div class="mb-3">
+                    <h5 class="border border-dark p-1" style="width: fit-content; font-weight: bold;" id="receiptAmount">Rs : 1000 </h5>
+                </div>
+
+                <div class="row mt-2 mb-2 justify-content-end">
+                    <div class="col-4">
+                        <img src="stamp-removebg-preview.png" alt="stamp"
+                            style="width: 100px; height: 100px; object-fit: cover;">
+                    </div>
+                </div>
+
+                <div class="row g-0">
+                    <div class="col-4 footer-bar" style="background-color: orange;"></div>
+                    <div class="col-4 footer-bar" style="background-color: white;"></div>
+                    <div class="col-4 footer-bar" style="background-color: green;"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <center>
+        <button class="btn btn-success mt-4" onclick="downloadReceipt()">Download Receipt as PDF</button>
+    </center>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        function generateReceipt() {
+            const name = document.getElementById('donorName').value;
+            const amount = document.getElementById('donationAmount').value;
+            const amountWords = document.getElementById('amountInWords').value;
+            const donationDate = document.getElementById('donationDate').value;
+
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+            document.getElementById('receiptDate').textContent = `Date: ${formattedDate}`;
+            document.getElementById('receiptText').innerHTML = `Received a sum of Rupees <strong>${amountWords}</strong> from 
+             <strong>${name}</strong> towards "<strong>Diwali Celebration 2024</strong>" as a helping hand to "<strong>United We Stand Foundation Nashik</strong>"
+            `;
+            document.getElementById('receiptAmount').textContent = `Rs: ${amount}`;
+            document.getElementById('receipt').style.display = 'block';
+        }
+
+        function downloadReceipt() {
+            const receiptElement = document.getElementById('receipt');
+            html2canvas(receiptElement).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const doc = new jspdf.jsPDF();
+                doc.addImage(imgData, 'PNG', 15, 15);
+                doc.save('DonationReceipt.pdf');
+            });
+        }
+    </script>
+
+</body>
+
+</html>
